@@ -13,20 +13,16 @@ import { harvestWithheldTokensToAuthority } from "./harvest.js";
 import * as fs from "fs";
 // Connection to devnet cluster
 const connection = new Connection(clusterApiUrl("devnet"), "confirmed");
-type WalletSecret = number[];
 
-// Import privatekeys from wallet.json
-import wallet from "../wallet.json";
 import { findHoldersWithProportions } from "./findholders.js";
 
+// Threshold for withheld fees from .env
+const threshHold = Number(process.env.THRESH_HOLD);
 
 // create a Keypair from the secret key
 const payer = Keypair.fromSecretKey(
         new Uint8Array(JSON.parse(fs.readFileSync("wallet.json", "utf-8")))
     );
-// Transaction signature returned from sent transaction
-// let transactionSignature: string;
-const threshHold = 8000000000;
 
 // Retrieve all Token Accounts for the Mint Account
 export async function gaugeWithheldFeesAndInitiateAirdrop(mint: string) {
