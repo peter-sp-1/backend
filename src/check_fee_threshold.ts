@@ -40,7 +40,7 @@ export async function gaugeWithheldFeesAndInitiateAirdrop(mint: string) {
           });
 
         // List of Token Accounts to withdraw fees from
-        const accountsToWithdrawFrom = [];
+        const accountsToWithdrawFrom: PublicKey[] = [];
 
         for (const accountInfo of allAccounts) {
         const account = unpackAccount(
