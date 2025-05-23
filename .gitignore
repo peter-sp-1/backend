@@ -1,2 +1,4 @@
 .env
 *.json
+wallet.json
+secure_keys
